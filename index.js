@@ -22,7 +22,9 @@ function addMovie(event) {
 
 function deleteMovie(event) {
     event.target.parentNode.remove()
-    message.textContent = "Movie deleted!"
+    let deleteMessage = event.target.parentNode.firstChild.textContent
+    message.textContent = `${deleteMessage} deleted!`
+    revealMessage();
 }
 
 document.querySelector('form').addEventListener('submit', addMovie);
@@ -30,8 +32,14 @@ document.querySelector('form').addEventListener('submit', addMovie);
 function crossOffMovie(event) {
     event.target.classList.toggle('checked')
     if(event.target.classList.contains('checked')) {
-         message.textContent = "Movie watched!"
+         message.textContent = `${event.target.textContent} watched!`
     } else {
-        message.textContent = "Movie added back!"
+        message.textContent = `${event.target.textContent} added back!`
     }
+    revealMessage();
+}
+
+function revealMessage() {
+    message.classList.remove('hide')
+    setTimeout(() => message.classList.toggle('hide'), 1000)
 }
